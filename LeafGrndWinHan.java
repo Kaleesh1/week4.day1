@@ -39,15 +39,18 @@ public class LeafGrndWinHan {
 		driver.findElement(By.xpath("//button[text()='Do not close me ']")).click();
 		Set<String> windowHandles2 = driver.getWindowHandles();
 		List<String> windows2 =  new ArrayList<String>(windowHandles2);
-		String string = windows2.get(1);
-		driver.switchTo().window(string);
-		driver.close();
+		for (int i = 1; i < windows2.size(); i++) {
+			String string = windows2.get(i);
+			driver.switchTo().window(string);
+			driver.close();
+		}
 		String par2 = windows2.get(0);
 		driver.switchTo().window(par2);
 
 		driver.findElement(By.xpath("//button[text()='Wait for 5 seconds']")).click();
 		Thread.sleep(5000);
-
+		Set<String> windowHandles3 = driver.getWindowHandles();
+		System.out.println("No of Opened wins " + windowHandles3.size());
 	}
 
 }
